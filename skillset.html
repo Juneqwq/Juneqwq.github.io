@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skillset - Vitvalder Art</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Skillset Page Specific Styles */
+        #skillset-showcase {
+            min-height: auto;
+            padding: 80px 0;
+        }
+
+        .skillset-header {
+            text-align: center;
+            margin-bottom: 80px;
+            opacity: 0;
+            animation: fadeIn 0.7s ease-out 0.3s forwards;
+        }
+
+        .skillset-header h2 {
+            font-family: 'Modern M', sans-serif;
+            font-size: 3rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            color: #35d7a3;
+        }
+
+        .skillset-header p {
+            font-size: 1.1rem;
+            color: #b0b0b0;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            opacity: 0;
+            animation: fadeIn 0.7s ease-out 0.6s forwards;
+        }
+
+        .skill-card {
+            background: rgba(53, 215, 163, 0.05);
+            border: 1px solid rgba(53, 215, 163, 0.2);
+            border-radius: 4px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(53, 215, 163, 0.05);
+            border-left: 3px solid #35d7a3;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .skill-card:hover::before {
+            opacity: 1;
+        }
+
+        .skill-card:hover {
+            border-color: #35d7a3;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(53, 215, 163, 0.1);
+        }
+
+        .skill-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .skill-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 4px;
+            object-fit: cover;
+            background: rgba(53, 215, 163, 0.1);
+            border: 1px solid rgba(53, 215, 163, 0.3);
+            padding: 8px;
+        }
+
+        .skill-name {
+            font-size: 1.3em;
+            font-weight: 600;
+            color: #35d7a3;
+            margin: 0;
+            font-family: 'Modern M', sans-serif;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .skill-info {
+            position: relative;
+            z-index: 1;
+        }
+
+        .skill-level-display {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .skill-level {
+            font-size: 0.9em;
+            color: #b0b0b0;
+        }
+
+        .skill-percentage {
+            font-size: 1.1em;
+            color: #35d7a3;
+            font-weight: 600;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(53, 215, 163, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            border: 1px solid rgba(53, 215, 163, 0.2);
+            position: relative;
+            z-index: 1;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #35d7a3, #2ec795);
+            border-radius: 3px;
+            transition: width 0.6s ease;
+            box-shadow: 0 0 15px rgba(53, 215, 163, 0.5);
+        }
+
+        .skill-card:hover .progress-fill {
+            box-shadow: 0 0 20px rgba(53, 215, 163, 0.8);
+        }
+
+        .back-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            display: inline-block;
+        }
+
+        .back-button a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 24px;
+            background: rgba(53, 215, 163, 0.15);
+            border: 2px solid #35d7a3;
+            border-radius: 4px;
+            color: #35d7a3;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            font-family: 'Modern M', sans-serif;
+        }
+
+        .back-button a:hover {
+            background: rgba(53, 215, 163, 0.25);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(53, 215, 163, 0.2);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .skillset-header h2 {
+                font-size: 2rem;
+            }
+
+            .skillset-header p {
+                font-size: 1rem;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .skill-card {
+                padding: 25px;
+            }
+
+            .back-button a {
+                padding: 10px 18px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .skillset-header h2 {
+                font-size: 1.5rem;
+                margin-bottom: 15px;
+            }
+
+            .skillset-header {
+                margin-bottom: 60px;
+            }
+
+            .skill-name {
+                font-size: 1.1em;
+            }
+
+            .back-button a {
+                padding: 8px 16px;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="page-wrapper">
+        <!-- Back Button -->
+        <div class="back-button">
+            <a href="index.html#projects">Zpět</a>
+        </div>
+
+        <!-- Skillset Showcase Section -->
+        <section id="skillset-showcase" class="container">
+            <div class="skillset-header">
+                <h2>Moje Dovednosti</h2>
+                <p>Přehled mých profesionálních dovedností a znalostí v různých oblastech.</p>
+            </div>
+
+            <div class="skills-grid">
+                <!-- Skill Card: HTML -->
+                <div class="skill-card">
+                    <div class="skill-header">
+                        <img src="https://via.placeholder.com/50/35d7a3/0a0a0a?text=HTML" alt="HTML" class="skill-icon">
+                        <h3 class="skill-name">HTML</h3>
+                    </div>
+                    <div class="skill-info">
+                        <div class="skill-level-display">
+                            <span class="skill-level">Úroveň znalostí</span>
+                            <span class="skill-percentage">8/10</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 80%;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skill Card: CSS -->
+                <div class="skill-card">
+                    <div class="skill-header">
+                        <img src="https://via.placeholder.com/50/35d7a3/0a0a0a?text=CSS" alt="CSS" class="skill-icon">
+                        <h3 class="skill-name">CSS</h3>
+                    </div>
+                    <div class="skill-info">
+                        <div class="skill-level-display">
+                            <span class="skill-level">Úroveň znalostí</span>
+                            <span class="skill-percentage">7/10</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 70%;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skill Card: JavaScript -->
+                <div class="skill-card">
+                    <div class="skill-header">
+                        <img src="https://via.placeholder.com/50/35d7a3/0a0a0a?text=JS" alt="JavaScript" class="skill-icon">
+                        <h3 class="skill-name">JavaScript</h3>
+                    </div>
+                    <div class="skill-info">
+                        <div class="skill-level-display">
+                            <span class="skill-level">Úroveň znalostí</span>
+                            <span class="skill-percentage">7/10</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 70%;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skill Card: Photoshop -->
+                <div class="skill-card">
+                    <div class="skill-header">
+                        <img src="https://via.placeholder.com/50/35d7a3/0a0a0a?text=PS" alt="Photoshop" class="skill-icon">
+                        <h3 class="skill-name">Photoshop</h3>
+                    </div>
+                    <div class="skill-info">
+                        <div class="skill-level-display">
+                            <span class="skill-level">Úroveň znalostí</span>
+                            <span class="skill-percentage">9/10</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 90%;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skill Card: Blender -->
+                <div class="skill-card">
+                    <div class="skill-header">
+                        <img src="https://via.placeholder.com/50/35d7a3/0a0a0a?text=BL" alt="Blender" class="skill-icon">
+                        <h3 class="skill-name">Blender</h3>
+                    </div>
+                    <div class="skill-info">
+                        <div class="skill-level-display">
+                            <span class="skill-level">Úroveň znalostí</span>
+                            <span class="skill-percentage">6/10</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 60%;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skill Card: DaVinci Resolve -->
+                <div class="skill-card">
+                    <div class="skill-header">
+                        <img src="https://via.placeholder.com/50/35d7a3/0a0a0a?text=DR" alt="DaVinci Resolve" class="skill-icon">
+                        <h3 class="skill-name">DaVinci</h3>
+                    </div>
+                    <div class="skill-info">
+                        <div class="skill-level-display">
+                            <span class="skill-level">Úroveň znalostí</span>
+                            <span class="skill-percentage">8/10</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 80%;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skill Card: Photography -->
+                <div class="skill-card">
+                    <div class="skill-header">
+                        <img src="https://via.placeholder.com/50/35d7a3/0a0a0a?text=PH" alt="Photography" class="skill-icon">
+                        <h3 class="skill-name">Foto</h3>
+                    </div>
+                    <div class="skill-info">
+                        <div class="skill-level-display">
+                            <span class="skill-level">Úroveň znalostí</span>
+                            <span class="skill-percentage">8/10</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 80%;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skill Card: Git -->
+                <div class="skill-card">
+                    <div class="skill-header">
+                        <img src="https://via.placeholder.com/50/35d7a3/0a0a0a?text=GIT" alt="Git" class="skill-icon">
+                        <h3 class="skill-name">Git</h3>
+                    </div>
+                    <div class="skill-info">
+                        <div class="skill-level-display">
+                            <span class="skill-level">Úroveň znalostí</span>
+                            <span class="skill-percentage">7/10</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 70%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
