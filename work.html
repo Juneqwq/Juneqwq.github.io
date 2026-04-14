@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Work - Vitvalder Art</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Work Page Specific Styles */
+        #work-showcase {
+            min-height: auto;
+            padding: 80px 0;
+        }
+
+        .work-header {
+            text-align: center;
+            margin-bottom: 80px;
+            opacity: 0;
+            animation: fadeIn 0.7s ease-out 0.3s forwards;
+        }
+
+        .work-header h2 {
+            font-family: 'Modern M', sans-serif;
+            font-size: 3rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            color: #35d7a3;
+        }
+
+        .work-header p {
+            font-size: 1.1rem;
+            color: #b0b0b0;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background: #35d7a3;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+        }
+
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+            margin-bottom: 50px;
+            opacity: 0;
+            animation: fadeIn 0.7s ease-out forwards;
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+            animation-delay: 0.3s;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+            animation-delay: 0.5s;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            right: -17px;
+            background-color: #35d7a3;
+            border: 4px solid #35d7a3;
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .timeline-item:nth-child(even)::after {
+            left: -16px;
+        }
+
+        .timeline-content {
+            padding: 20px 30px;
+            background: rgba(53, 215, 163, 0.05);
+            border: 1px solid rgba(53, 215, 163, 0.2);
+            border-radius: 4px;
+            position: relative;
+        }
+
+        .timeline-content img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            float: left;
+            margin-right: 20px;
+        }
+
+        .timeline-content p {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #d0d0d0;
+            margin: 0;
+        }
+
+        .timeline-content::after {
+            content: " ";
+            position: absolute;
+            width: 0;
+            height: 0;
+            right: -15px;
+            top: 30px;
+            border: solid transparent;
+            border-width: 15px;
+            border-left-color: rgba(53, 215, 163, 0.2);
+        }
+
+        .timeline-item:nth-child(even) .timeline-content::after {
+            left: -15px;
+            border-left-color: transparent;
+            border-right-color: rgba(53, 215, 163, 0.2);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .home-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            display: inline-block;
+        }
+
+        .home-button a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 24px;
+            background: rgba(53, 215, 163, 0.15);
+            border: 2px solid #35d7a3;
+            border-radius: 4px;
+            color: #35d7a3;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+
+        .home-button a:hover {
+            background: rgba(53, 215, 163, 0.25);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(53, 215, 163, 0.2);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .timeline::after {
+                left: 31px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+
+            .timeline-item:nth-child(even) {
+                left: 0;
+            }
+
+            .timeline-item::after {
+                left: 15px;
+            }
+
+            .timeline-item:nth-child(even)::after {
+                left: 15px;
+            }
+
+            .timeline-content::after {
+                left: 15px;
+                border-right-color: transparent;
+                border-left-color: rgba(53, 215, 163, 0.2);
+            }
+
+            .timeline-item:nth-child(even) .timeline-content::after {
+                left: 15px;
+            }
+
+            .work-header h2 {
+                font-size: 2rem;
+            }
+
+            .home-button a {
+                padding: 10px 18px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="page-wrapper">
+        <!-- Home Button -->
+        <div class="home-button">
+            <a href="index.html#projects">Zpět</a>
+        </div>
+
+        <!-- Work Showcase Section -->
+        <section id="work-showcase" class="container">
+            <div class="work-header">
+                <h2>Pracovní <b>zkušenosti</b></h2>
+                <p>Pracovní zkušenosti v kreativním oboru</p>
+            </div>
+
+            <div class="timeline">
+                <!-- Work Item 1 -->
+                
+
+                <!-- Work Item 3 -->
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <img src="img/pirati_logo.png" alt="Work 3" style="width: 60px; height: auto;">
+                        <p><strong>(2026 - nyní)</strong><i>- Česká Pirátská Strana</i><br>Short-form video editor, grafik. Výpomoc při kampaních, volbách atp.</p>
+                    </div>
+                </div>
+
+                <!-- Work Item 4 -->
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <img src="img/glore.png" alt="Work 4" style="width: 60px; height: auto;">
+                        <p><strong>(2025 - 2026)</strong> <i>- Team Glore</i><br>Short-Form video editing.</p>
+                    </div>
+                </div>
+
+                <!-- Work Item 5 -->
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <img src="img/logozus-287x300.png" alt="Work 5" style="width: 60px; height: auto;">
+                        <p><strong>(2024 - 2025)</strong><i>- ZUŠ Ostrava-Zábřeh</i><br>Fotograf</p>
+                    </div>
+                </div>
+
+                <!-- Work Item 6 -->
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <img src="img/hcvitkovice_logo.png" alt="Work 6" style="width: 60px; height: auto;">
+                        <p><strong>(Říjen 2025)</strong><i>- HC Vítkovice Ridera / VOŠMET</i><br>Fotograf utkání HC Vítkovice Ridera proti HC Verva Litvínov v TELH.</p>
+                    </div>
+                </div>
+
+                <!-- Work Item 7 -->
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <img src="img/21phxlogo.png" alt="Work 7">
+                        <p><strong>(2018 - 2021) </strong><i>- 21Phoenix</i><br>Rozjed, management, grafika, fotografie aj. v rámci osobního projektu - esportového týmu.</p>
+                    </div>
+                </div>
+
+                <!-- Work Item 8 -->
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <img src="img/pzlogo.png" alt="Work 8">
+                        <p><strong>(2021 - 2023) </strong><i>- Playzone, eSuba, Sampi aj.</i><br>Profesionální komentář esportových utkání v counter-strike či jiných titulech, produkce živého vysílání a dodržování požadavků partnerů.</p>
+                    </div>
+                </div>
+
+                <!-- Work Item 9 -->
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <img src="img/FFClogo.png" alt="Work 9">
+                        <p><strong>(2021)</strong>    <i>- FolkFoodCatering</i><br>Vypomohl jsem při startu FolkFoodCatering.cz v rámci brandingu, loga, webových stránek a promo fotografií či videa.</p>
+                    </div>
+                </div>
+
+                <!-- Work Item 10 -->
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <img src="img/eerinesslogo.webp" alt="Work 10">
+                        <p><strong>(2021 - 2022)</strong>   <i>- eEriness, z.s</i><br>Spolku eEriness jsem pomohl v rámci kompletního rebrandu a dlouhodobě pracoval na promo příspěvcích na sociální sítě.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
